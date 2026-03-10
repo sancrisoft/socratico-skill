@@ -44,27 +44,28 @@ claude --version
 
 ## Instalación
 
-### Opción 1: Clonar desde GitHub
+### Claude Code (Plugin)
+
+Instala desde el marketplace sancrisoft-plugins:
 
 ```bash
-git clone https://github.com/sancrisoft/socratico-skill.git
-cd socratico-skill
-chmod +x install.sh
-./install.sh
+claude plugin install socratico --marketplace sancrisoft-plugins
 ```
 
-### Opción 2: Instalación directa
+### Skills CLI (alternativa)
+
+Si no usas Claude Code, puedes instalar con `npx skills`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sancrisoft/socratico-skill/main/install.sh | bash
+npx skills add https://github.com/sancrisoft/socratico-skill.git
 ```
 
-### Windows (PowerShell)
+---
 
-```powershell
-git clone https://github.com/sancrisoft/socratico-skill.git
-cd socratico-skill
-.\install.ps1
+## Desinstalación
+
+```bash
+claude plugin uninstall socratico
 ```
 
 ---
@@ -85,9 +86,9 @@ Deberías ver el análisis socrático con las 3 preguntas estructuradas.
 
 ```
 socratico-skill/
+├── .claude-plugin/
+│   └── plugin.json
 ├── README.md
-├── install.sh
-├── install.ps1
 └── skills/
     └── socratico/
         └── SKILL.md
