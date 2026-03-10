@@ -1,6 +1,6 @@
 ---
 name: socratico
-description: Analiza tareas con el método socrático antes de ejecutarlas. Genera 3 preguntas (teórica, framework, aplicación) para entender profundamente el problema antes de implementar. Activa con "socrático:" seguido de la instrucción.
+description: Analiza tareas con el método socrático antes de ejecutarlas. Genera 3 preguntas estructuradas (teórica, framework, aplicación) para entender profundamente el problema antes de implementar. Usa este skill cuando el usuario escriba "socrático:" seguido de una instrucción, o cuando pida analizar antes de implementar, reflexionar sobre un enfoque, pensar antes de codear, entender un problema antes de resolverlo, aplicar el método socrático, o quiera un análisis estructurado previo a la ejecución. También activa cuando el usuario diga "quiero entender primero", "analicemos esto", "antes de codear", o pida planificación reflexiva.
 allowed-tools:
   - Read
   - Write
@@ -13,18 +13,7 @@ allowed-tools:
 
 # Skill: Socrático
 
-Analiza tareas con el método socrático antes de ejecutarlas. Genera reflexión estructurada para entender el problema antes de implementar.
-
----
-
-## Trigger
-
-Este skill se activa cuando el usuario escribe `socrático:` seguido de una instrucción.
-
-Ejemplos de activación:
-- `socrático: crea un script que sincronice archivos`
-- `socrático: implementa autenticación con JWT`
-- `socrático: refactoriza este componente para usar hooks`
+La reflexión antes de la acción produce mejores implementaciones. El método socrático estructura esa reflexión en 3 dimensiones — teoría, frameworks y aplicación — para que tanto tú como el usuario entiendan el problema en profundidad antes de escribir una sola línea de código. Esto evita retrabajos, descubre edge cases temprano, y alinea expectativas.
 
 ---
 
@@ -32,7 +21,7 @@ Ejemplos de activación:
 
 ### PASO 1: Extraer la Instrucción
 
-Identifica claramente la instrucción/idea/problema del mensaje del usuario.
+Antes de analizar, clarifica qué se pide. Extraer la instrucción primero evita que el análisis socrático se desvíe del objetivo real del usuario.
 
 Formato de extracción:
 ```
@@ -43,12 +32,12 @@ Formato de extracción:
 
 ### PASO 2: Generar 3 Preguntas Socráticas
 
-Transforma la tarea en 3 preguntas que profundicen el entendimiento:
+Cada pregunta aporta una dimensión distinta de comprensión. Las 3 son necesarias porque juntas cubren el espectro completo: qué es bueno (teoría), cómo lograrlo (framework), y cómo aplicarlo aquí (contexto). Adapta la profundidad al tamaño de la tarea — tareas simples merecen un análisis más breve.
 
 #### 1️⃣ TEÓRICA
 > ¿Qué hace que [tipo de output solicitado] sea efectivo?
 
-Responde con criterios concretos de calidad y efectividad. Lista 4-6 características que definen una buena implementación.
+Responde con criterios concretos de calidad y efectividad. Lista 4-6 características que definen una buena implementación. Evita generalidades — cada criterio debe ser específico y verificable para esta tarea.
 
 #### 2️⃣ FRAMEWORK
 > ¿Qué principios, patrones o mejores prácticas aplican a este tipo de problema?
@@ -71,14 +60,12 @@ Genera un plan concreto que incorpore los insights de las preguntas anteriores. 
 
 ### PASO 3: Presentar el Análisis
 
-Mostrar las 3 secciones con respuestas concretas.
-
-**IMPORTANTE:** NO ejecutes la tarea todavía. Solo presenta el análisis.
+Presenta las 3 secciones con respuestas concretas y específicas — no genéricas. No ejecutes la tarea todavía; el valor del método socrático está en que el usuario revise y valide el razonamiento antes de actuar.
 
 Formato de presentación:
 
 ```markdown
-## 🧠 Socrático: [Título descriptivo]
+## Socrático: [Título descriptivo]
 
 **Instrucción extraída:** [lo que se pide]
 
@@ -114,52 +101,20 @@ Con consideraciones:
 
 ### PASO 4: Confirmar Acción
 
-Después de presentar el análisis, usa AskUserQuestion para confirmar:
-
-```json
-{
-  "questions": [{
-    "question": "¿Cómo quieres proceder?",
-    "header": "Acción",
-    "options": [
-      {"label": "Ejecutar", "description": "Procedo a implementar el plan"},
-      {"label": "Copiar", "description": "Te doy el plan en formato copiable"},
-      {"label": "Refinar", "description": "Ajustemos el enfoque antes de implementar"}
-    ],
-    "multiSelect": false
-  }]
-}
-```
+Después de presentar el análisis, pregunta al usuario cómo quiere proceder usando AskUserQuestion con estas 3 opciones:
+- **Ejecutar**: Proceder a implementar el plan
+- **Copiar**: Entregar el plan en formato copiable
+- **Refinar**: Ajustar el enfoque antes de implementar
 
 ---
 
 ## Manejo de Respuestas
 
 ### Si elige "Ejecutar"
-1. Implementa el plan presentado
-2. Sigue los criterios de calidad identificados en la pregunta TEÓRICA
-3. Aplica los patrones/principios del FRAMEWORK
-4. Muestra el código final con comentarios donde sea necesario
+Usa Read, Glob, Grep para explorar el código existente, y Write, Edit, Bash para implementar. Sigue los criterios de calidad de la pregunta TEÓRICA y aplica los patrones del FRAMEWORK.
 
 ### Si elige "Copiar"
-Presenta el plan completo en un bloque de código markdown para fácil copia:
-
-```markdown
-## Plan: [Título]
-
-### Objetivo
-[Lo que se busca lograr]
-
-### Enfoque
-[Metodología a seguir]
-
-### Implementación
-[Código o pasos detallados]
-
-### Consideraciones
-- [punto 1]
-- [punto 2]
-```
+Presenta el plan completo en un bloque de código markdown para fácil copia, incluyendo objetivo, enfoque, implementación y consideraciones.
 
 ### Si elige "Refinar"
 Pregunta qué aspecto quiere ajustar:
@@ -170,64 +125,18 @@ Pregunta qué aspecto quiere ajustar:
 
 ---
 
-## Ejemplo Completo
+## Ejemplo
 
 **Input:** `socrático: crea un script que sincronice archivos entre dos carpetas`
 
-**Output:**
-
----
-
-## 🧠 Socrático: Script de sincronización
+**Output esperado:**
 
 **Instrucción extraída:** Crear script para sincronizar archivos entre dos carpetas.
 
----
+**1️⃣ TEÓRICA** — Criterios como: detecta cambios incrementales, maneja conflictos, es idempotente, tiene dry-run, logging claro.
 
-### 1️⃣ TEÓRICA: ¿Qué hace que un script de sync sea efectivo?
+**2️⃣ FRAMEWORK** — Patrones como: rsync (gold standard para delta sync), Watchdog (cambios en tiempo real), Atomic operations (evitar corrupción).
 
-- Detecta cambios incrementales (no copia todo cada vez)
-- Maneja conflictos (mismo archivo modificado en ambos lados)
-- Es idempotente (correrlo múltiples veces = mismo resultado)
-- Tiene dry-run para preview
-- Logging claro de qué cambió
+**3️⃣ APLICACIÓN** — Plan concreto con rsync y opciones (`-avz --delete --dry-run`), explicando cada flag.
 
----
-
-### 2️⃣ FRAMEWORK: ¿Qué principios aplican?
-
-- **rsync**: gold standard para delta sync con checksums
-- **Watchdog pattern**: para cambios en tiempo real
-- **Three-way merge**: para resolver conflictos
-- **Atomic operations**: para evitar corrupción
-
----
-
-### 3️⃣ APLICACIÓN: Plan concreto
-
-```bash
-#!/bin/bash
-rsync -avz --delete --dry-run "$SOURCE" "$DEST"
-```
-
-Con opciones:
-- `-a`: archive mode (preserva permisos, timestamps)
-- `-v`: verbose
-- `-z`: compresión
-- `--delete`: elimina archivos en destino que no existen en origen
-- `--dry-run`: preview sin cambios
-
----
-
-**¿Cómo quieres proceder?**
-[Ejecutar] [Copiar] [Refinar]
-
----
-
-## Notas de Implementación
-
-1. **Siempre extraer la instrucción primero** — clarifica el objetivo
-2. **Las 3 preguntas son obligatorias** — no saltar ninguna
-3. **Respuestas concretas, no genéricas** — criterios y patrones específicos
-4. **NO ejecutar sin confirmación** — el método socrático requiere reflexión
-5. **Adaptar la profundidad** — tareas simples = análisis más breve
+Luego pregunta: ¿Ejecutar, Copiar, o Refinar?
