@@ -1,30 +1,30 @@
 # Socratico Skill para Claude Code
 
-Skill para análisis socrático antes de implementar tareas. Genera 3 preguntas (teórica, framework, aplicación) para entender profundamente el problema antes de codear.
+Skill para analisis socratico antes de implementar tareas. Genera 3 preguntas (teorica, framework, aplicacion) para entender profundamente el problema antes de codear.
 
 ---
 
-## Características
+## Caracteristicas
 
-- **Método socrático estructurado** - 3 preguntas que profundizan el entendimiento
-- **Pregunta teórica** - ¿Qué hace que este tipo de solución sea efectiva?
-- **Pregunta de framework** - ¿Qué principios, patrones o mejores prácticas aplican?
-- **Pregunta de aplicación** - Plan concreto aplicando los insights anteriores
-- **Flujo interactivo** - Presenta análisis y espera confirmación antes de ejecutar
+- **Metodo socratico estructurado** - 3 preguntas que profundizan el entendimiento
+- **Pregunta teorica** - Que hace que este tipo de solucion sea efectiva?
+- **Pregunta de framework** - Que principios, patrones o mejores practicas aplican?
+- **Pregunta de aplicacion** - Plan concreto aplicando los insights anteriores
+- **Flujo interactivo** - Presenta analisis y espera confirmacion antes de ejecutar
 
 ---
 
 ## Uso
 
-Activa el skill con el prefijo `socrático:` seguido de la tarea:
+Activa el skill con el prefijo `socratico:` seguido de la tarea:
 
 ```
-socrático: implementa autenticación con JWT
-socrático: refactoriza este componente para usar hooks
-socrático: crea un script que sincronice archivos
+socratico: implementa autenticacion con JWT
+socratico: refactoriza este componente para usar hooks
+socratico: crea un script que sincronice archivos
 ```
 
-El skill generará un análisis estructurado y preguntará cómo proceder:
+El skill generara un analisis estructurado y preguntara como proceder:
 - **Ejecutar** - Implementa el plan presentado
 - **Copiar** - Te da el plan en formato copiable
 - **Refinar** - Ajusta el enfoque antes de implementar
@@ -42,42 +42,43 @@ claude --version
 
 ---
 
-## Instalación
+## Instalacion
 
-### Opción 1: Clonar desde GitHub
+### Claude Code (Plugin)
 
-```bash
-git clone https://github.com/sancrisoft/socratico-skill.git
-cd socratico-skill
-chmod +x install.sh
-./install.sh
-```
-
-### Opción 2: Instalación directa
+Instala desde el marketplace sancrisoft-plugins:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sancrisoft/socratico-skill/main/install.sh | bash
+claude plugin install socratico --marketplace sancrisoft-plugins
 ```
 
-### Windows (PowerShell)
+### Skills CLI (alternativa)
 
-```powershell
-git clone https://github.com/sancrisoft/socratico-skill.git
-cd socratico-skill
-.\install.ps1
+Si no usas Claude Code, puedes instalar con `npx skills`:
+
+```bash
+npx skills add https://github.com/sancrisoft/socratico-skill.git
 ```
 
 ---
 
-## Verificación
+## Desinstalacion
 
-Después de instalar, reinicia Claude Code y prueba:
-
-```
-socrático: crea una función que valide emails
+```bash
+claude plugin uninstall socratico
 ```
 
-Deberías ver el análisis socrático con las 3 preguntas estructuradas.
+---
+
+## Verificacion
+
+Despues de instalar, reinicia Claude Code y prueba:
+
+```
+socratico: crea una funcion que valide emails
+```
+
+Deberias ver el analisis socratico con las 3 preguntas estructuradas.
 
 ---
 
@@ -85,9 +86,9 @@ Deberías ver el análisis socrático con las 3 preguntas estructuradas.
 
 ```
 socratico-skill/
+├── .claude-plugin/
+│   └── plugin.json
 ├── README.md
-├── install.sh
-├── install.ps1
 └── skills/
     └── socratico/
         └── SKILL.md

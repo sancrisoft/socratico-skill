@@ -1,0 +1,11 @@
+{
+  "name": "socratico",
+  "version": "1.0.0",
+  "description": "Analiza tareas con el metodo socratico antes de ejecutarlas. Genera 3 preguntas estructuradas (teorica, framework, aplicacion) para entender profundamente el problema antes de implementar.",
+  "author": {
+    "name": "Sancrisoft"
+  },
+  "repository": "https://github.com/sancrisoft/socratico-skill",
+  "license": "MIT",
+  "keywords": ["socratic-method", "analysis", "planning", "learning", "spanish"]
+}
