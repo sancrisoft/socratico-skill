@@ -25,6 +25,7 @@ socrático: crea un script que sincronice archivos
 ```
 
 El skill generará un análisis estructurado y preguntará cómo proceder:
+
 - **Ejecutar** - Implementa el plan presentado
 - **Copiar** - Te da el plan en formato copiable
 - **Refinar** - Ajusta el enfoque antes de implementar
@@ -46,10 +47,10 @@ claude --version
 
 ### Claude Code (Plugin)
 
-Instala desde el marketplace sancrisoft-plugins:
+Dentro de Claude Code, ejecuta:
 
-```bash
-claude plugin install socratico --marketplace sancrisoft-plugins
+```
+/plugin install socratico@sancrisoft/plugins
 ```
 
 ### Skills CLI (alternativa)
